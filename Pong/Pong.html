@@ -1,0 +1,112 @@
+Código só funciona no p5.js web editor. Fiz por lá.
+
+<script>var yBola = 200;
+var xBola = 300;
+var velocidade = 6;
+var velocidadeY = 6;
+var raio = 25/2
+
+//VariaveisPlayer
+var xPlayer = 10;
+var yPlayer = 165;
+var rectTamanhoX = 10;
+var rectTamanhoY = 70;
+
+//VariaveisCPU
+var xCPU = 580;
+var yCPU = 165;
+
+//Pontuacao
+var pontoCPU = 0;
+var pontoPlayer = 0;
+
+function setup() {
+  createCanvas(600, 400);
+}
+
+function draw() {
+  background(0);
+  desenhaBolinha();
+  movimentaBolinha();
+  verificaColisao();
+  desenhaPlayer(xPlayer, yPlayer, rectTamanhoX, rectTamanhoY);
+  movimentaPlayer1();
+  desenhaCPU(xCPU, yCPU);
+  movimentaCPU();
+  playerBallColision();
+  cpuBallColision();
+  calculaPonto();
+  desenhaPlacar();
+  
+}
+
+function desenhaBolinha() {
+  circle(xBola, yBola, 25);
+}
+
+function movimentaBolinha() {
+  xBola += velocidade;
+  yBola += velocidadeY;
+}
+
+function verificaColisao() {
+  if (xBola >= 600 - raio || xBola <= 0 + raio) {
+    velocidade *= -1; 
+  }
+  if(yBola >= 400 - raio || yBola <= 0 + raio) {
+    velocidadeY *= -1;
+    } 
+}
+
+function desenhaPlayer(x, y, tamanhoX, tamanhoY) {
+  rect(x, y, tamanhoX, tamanhoY);
+}
+
+function movimentaPlayer1() {
+  if (keyIsDown(UP_ARROW)) {
+    yPlayer -= 5
+  } else if (keyIsDown(DOWN_ARROW)) {
+    yPlayer += 5
+  }
+}
+
+function desenhaCPU(x, y) {
+  rect(x, y, 10, 70)
+}
+
+function movimentaCPU() {
+  yCPU = yBola + 12;
+}
+
+function playerBallColision() {
+  if (xBola - raio < xPlayer + rectTamanhoX && yBola + raio > yPlayer && yBola - raio < yPlayer + rectTamanhoY) {
+    velocidade *= -1;
+  }
+}
+
+function cpuBallColision() {
+  if (xBola + raio >= xCPU && yBola + raio > yCPU && yBola - raio < yCPU + rectTamanhoY) {
+    velocidade *= -1;
+  }
+}
+
+function calculaPonto() {
+  if (xBola < 0 + raio) {
+    pontoCPU += 1;
+  } else if (xBola > 600 - raio) {
+    pontoPlayer += 1;
+  }
+}
+
+function desenhaPlacar() {
+  textSize(20)
+  fill(255)
+  rect(275, 0, 20, 30)
+  rect(315, 0, 20, 30)
+  fill(0)
+  text(pontoPlayer, 280, 20);
+  text(pontoCPU, 320, 20)
+  fill(255)
+}
+
+</script>
