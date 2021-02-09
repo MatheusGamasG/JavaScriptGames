@@ -1,7 +1,7 @@
 var imagemCarro = [document.getElementById('carro'), document.getElementById('carro2'), document.getElementById('carro3'), document.getElementById('carro'), document.getElementById('carro2'), document.getElementById('carro3')]
 var xCarro = [810, 810, 810, 810, 810, 810]
 var yCarro = [40, 94, 148, 208, 262, 316]
-var speed = [3, 11, 8, 2, 7, 5]
+var speed = [2, 7, 4, 1.8, 3, 1.9]
 var somColisao = document.getElementById('audiocolis');
 
 function movimentaCarro() {
